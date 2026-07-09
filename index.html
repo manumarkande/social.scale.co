@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sukhvinder Singh</title>
+
+ 
+<style>
+ .custom-button {
+    background-color: #00796b; 
+    color: white; 
+    border: none; 
+    padding: 15px 32px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    transition: background-color 0.3s, transform 0.2s; 
+}
+
+
+.custom-button:hover {
+    background-color: #14312e; 
+    transform: scale(1.1); 
+} 
+  
+  
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e0f7fa; /* Light blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: #ffffff; /* White background for content area */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+
+.profile {
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4dd0e1; /* Light blue border */
+    margin-bottom: 10px;
+}
+
+.profile h2 {
+    font-size: 22px;
+    margin: 5px 0;
+}
+
+.profile p {
+    font-size: 16px;
+    color: #555;
+}
+
+
+.contact-info h3 {
+    font-size: 20px;
+    color: #00796b; 
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+	font-family: 'Roboto';
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+	<div class="profile">
+            <img src="images/logo.png" alt="logo">" alt="Profile Picture" class="profile-image">
+                         
+				<!--<button class="custom-button" id="save-btn">+ Add to Contacts</button>-->
+        </div>
+    <h1>the.social.scale.co</h1>
+
+    <!-- Example of the contact information on the webpage -->
+    <div class="contact-info" id="contact-info">
+        <p><strong>Name:</strong> Manu Markande</p>
+        <p><strong>Email:</strong> manumarkande80@gmail.com</p>
+        <p><strong>Phone:</strong> 8766296089</p>
+		<p><strong>Alternate Phone:</strong> 9310807894</p>
+            
+    </div>
+
+    <!-- Button to trigger the vCard download -->
+    <button class="custom-button" id="downloadBtn">Save Contact as vCard</button>
+
+    <script>
+        // Function to extract contact information and generate vCard
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Extract contact details from the page
+            const name = document.querySelector('#contact-info p:nth-of-type(1)').textContent.replace('Name:', '').trim();
+            const email = document.querySelector('#contact-info p:nth-of-type(2)').textContent.replace('Email:', '').trim();
+            const phone = document.querySelector('#contact-info p:nth-of-type(3)').textContent.replace('Phone:', '').trim();
+
+            // Create a vCard format string
+            const vCardData = `
+BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+EMAIL:${email}
+TEL:${phone}
+END:VCARD`;
+
+            // Create a Blob from the vCard data
+            const blob = new Blob([vCardData], { type: 'text/vcard' });
+
+            // Create a link element for the download
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${name.replace(/\s+/g, '_')}_contact.vcf`; // Use the name for the file name
+            link.click(); // Trigger the download
+        });
+    </script>
+</div>
+</body>
+</html>
